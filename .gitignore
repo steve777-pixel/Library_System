@@ -1,0 +1,52 @@
+### Maven Build Outputs ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Do NOT ignore the Maven wrapper binary
+!/.mvn/wrapper/maven-wrapper.jar
+
+### Compiled Java & Logs ###
+*.class
+*.log
+hs_err_pid*
+
+### IDE Configurations ###
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+
+# Visual Studio Code
+.vscode/
+
+### Local Environment / Secrets ###
+.env
+*.local
+secrets.properties
+application-local.properties
+
+### OS Generated Files ###
+.DS_Store
+Thumbs.db
+Desktop.ini
