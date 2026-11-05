@@ -26,7 +26,7 @@ Unlike a basic OOP exercise, this project focuses on building a complete softwar
 
 | Component | Technology |
 |---|---|
-| Programming Language | Java 25 |
+| Programming Language | Java 21 |
 | Backend Framework | Spring Boot |
 | Database | PostgreSQL |
 | ORM | Hibernate / Spring Data JPA |
