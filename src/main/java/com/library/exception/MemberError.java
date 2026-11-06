@@ -3,6 +3,7 @@ package com.library.exception;
 public enum MemberError{
     NULL_MEMBER("Member cannot be null."),
     MEMBER_NOT_ACTIVE("Member is not active."),
+    MEMBER_SUSPENDED("Member is suspended."),
     BORROWING_NULL_BOOK("Cannot borrow a null book."),
     BORROWING_LIMIT_REACHED("Cannot borrow more than 5 books at a time."),
     BORROWING_DUPLICATE("Member already borrowed this book."),

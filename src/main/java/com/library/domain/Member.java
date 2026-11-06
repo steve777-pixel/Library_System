@@ -79,18 +79,24 @@ public class Member{
         if(isSuspended()) this.status = MemberStatus.SUSPENDED;
     }
 
+    public void resetSuspension(){
+        this.suspensionPoints = 0;
+        if(this.membershipExpiryDate.isAfter(LocalDate.now())) this.status = MemberStatus.ACTIVE;
+    }
+
     public boolean isActive(){
         updateMembershipStatus();
         return status == MemberStatus.ACTIVE;
     }
 
     public void renewMembership(){
+        if(isSuspended()) throw new MemberException(MemberError.MEMBER_SUSPENDED, "Cannot renew membership when suspended.");
         this.membershipExpiryDate = LocalDate.now().plusYears(MEMBERSHIP_PERIOD);
         this.status = MemberStatus.ACTIVE;
     }
 
-    public void resetSuspension(){
-        this.suspensionPoints = 0;
+    public boolean isBorrowing(Loan loan){
+        return getActiveLoans().stream().anyMatch(existing -> existing.getBook().equals(loan.getBook()));
     }
 
     public void registerLoan(Loan loan){
@@ -98,13 +104,11 @@ public class Member{
 
         if(!loan.getMember().equals(this)) throw new MemberException(MemberError.INVALID_LOAN);
 
-        if(!isActive()) throw new MemberException(MemberError.MEMBER_NOT_ACTIVE);
+        if(!isActive()) throw new MemberException(MemberError.MEMBER_NOT_ACTIVE, "Cannot take loans when inactive.");
 
         if(getBorrowedBookCount() >= BORROWING_LIMIT) throw new MemberException(MemberError.BORROWING_LIMIT_REACHED);
 
-        boolean alreadyBorrowing = getActiveLoans().stream().anyMatch(existing -> existing.getBook().equals(loan.getBook()));
-
-        if(alreadyBorrowing) throw new MemberException(MemberError.BORROWING_DUPLICATE);
+        if(isBorrowing(loan)) throw new MemberException(MemberError.BORROWING_DUPLICATE);
 
         loans.add(loan);
     }    

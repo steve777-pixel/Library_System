@@ -51,12 +51,14 @@ public class Book {
     }
 
     public void addCopies(Integer copies){
+        if(copies == null) throw new BookException(BookError.NULL_COPIES);
         if(copies <= 0) throw new BookException(BookError.NEGATIVE_COPIES);
-        this.totalCopies += copies;
         this.availableCopies += copies;
+        if(this.totalCopies < this.availableCopies) this.totalCopies = this.availableCopies;
     }
 
     public void removeCopies(Integer copies){
+        if(copies == null) throw new BookException(BookError.NULL_COPIES);
         if(copies <= 0) throw new BookException(BookError.NEGATIVE_COPIES);
         if(copies > availableCopies) throw new BookException(BookError.COPIES_OUT_OF_RANGE);
         this.availableCopies -= copies;

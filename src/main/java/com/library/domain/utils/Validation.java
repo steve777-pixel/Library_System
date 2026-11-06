@@ -2,6 +2,9 @@ package com.library.domain.utils;
 
 public class Validation{
     public static String validateNotBlank(String value, String fieldName){
+        if(value == null){
+            throw new IllegalArgumentException(fieldName + " cannot be null.");
+        }
         if(value.isBlank()){
             throw new IllegalArgumentException(fieldName + " cannot be empty.");
         }

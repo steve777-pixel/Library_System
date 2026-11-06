@@ -12,7 +12,7 @@ public final class ISBN {
     private final String value;
 
     public ISBN(String isbn) {
-        if(isbn == null || isbn.isBlank()) throw new ISBNException(ISBNError.NULL_ISBN);
+        if(isbn == null) throw new ISBNException(ISBNError.NULL_ISBN);
 
         // 1. Remove hyphens and spaces first to equalize formatting variations
         String cleaned = isbn.trim().replace("-", "").replace(" ", "");

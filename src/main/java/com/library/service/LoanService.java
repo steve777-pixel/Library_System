@@ -20,8 +20,8 @@ public class LoanService{
 
         if(!book.isAvailable()) throw new BookException(BookError.BOOK_NOT_AVAILABLE);
 
-        book.borrowCopy();
         member.registerLoan(loan);
+        book.borrowCopy();
     }
 
     public void returnBook(Loan loan){
@@ -30,8 +30,11 @@ public class LoanService{
         if(loan.isReturned()) throw new LoanException(LoanError.LOAN_ALREADY_RETURNED);
 
         Book book = loan.getBook();
+        Member member = loan.getMember();
 
         loan.setReturnDate();
         book.returnCopy();
+        
+        if(loan.getDueDate().isBefore(LocalDate.now())) member.addSuspensionPoint();
     }
 }

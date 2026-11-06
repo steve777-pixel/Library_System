@@ -2,6 +2,8 @@ package com.library.domain.utils;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+import com.library.exception.utils.BookIDError;
+import com.library.exception.utils.BookIDException;
 
 // public record ???
 public final class BookID{
@@ -12,11 +14,11 @@ public final class BookID{
     private final String value;
 
     public BookID(String id){
-        Objects.requireNonNull(id, "Book ID cannot be null!");
+        if(id == null) throw new BookIDException(BookIDError.NULL_BOOK_ID);
         String trimmed = id.trim();
 
         if(!BOOK_ID_PATTERN.matcher(trimmed).matches()){
-            throw new IllegalArgumentException("Invalid book ID format structure. Valid format: AA0000000");
+            throw new BookIDException(BookIDError.INVALID_FORMAT);
         }
 
         this.value = trimmed;
