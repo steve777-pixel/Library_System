@@ -8,7 +8,6 @@ import com.library.exception.LoanException;
 import com.library.exception.MemberError;
 import com.library.exception.MemberException;
 import com.library.domain.utils.Formatter;
-import com.library.domain.utils.EmailConverter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,8 +21,7 @@ import lombok.*;
 public class Member{
     private String name;
 
-    @Id 
-    @Convert(converter = EmailConverter.class)
+    @EmbeddedId 
     private Email email;
 
     @Enumerated(EnumType.STRING)
@@ -97,6 +95,10 @@ public class Member{
 
     public boolean isBorrowing(Loan loan){
         return getActiveLoans().stream().anyMatch(existing -> existing.getBook().equals(loan.getBook()));
+    }
+
+    public boolean isBorrowing(Book book){
+        return getActiveLoans().stream().anyMatch(existing -> existing.getBook().getID().equals(book.getID()));
     }
 
     public void registerLoan(Loan loan){

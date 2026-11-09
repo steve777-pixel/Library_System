@@ -92,12 +92,12 @@ class LoanTest{
         assertEquals("Due date cannot be modified after returning.", exception.getMessage());
     }
 
-    @ParameterizedTest(name = "Should fail when: {5}")
+    @ParameterizedTest(name = "Should fail when: {1}")
     @MethodSource("provideInvalidDueDateAttributes")
     void throwsForInvalidDueDateAttributes(LocalDate newDate, String scenarioName){
         assertThrows(
             LoanException.class, 
-            () -> loan.changeDueDate(null),
+            () -> loan.changeDueDate(newDate),
             () -> "Expected constructor failure for scenario: " + scenarioName
         );
     }   

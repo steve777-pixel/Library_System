@@ -3,7 +3,6 @@ package com.library.domain;
 import com.library.domain.utils.ISBN;
 import com.library.domain.utils.BookID;
 import com.library.domain.utils.Validation;
-import com.library.domain.utils.BookIDConverter;
 import com.library.domain.utils.ISBNConverter;
 import com.library.exception.BookException;
 import com.library.exception.BookError;
@@ -17,9 +16,10 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 // @AllArgsConstructor
 public class Book {
-    @Id // Remove @GeneratedValue if your ID is custom string-based (e.g., AB1234567)
+    // @Id // Remove @GeneratedValue if your ID is custom string-based (e.g., AB1234567)
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Convert(converter = BookIDConverter.class)
+    // @Convert(converter = BookIDConverter.class)
+    @EmbeddedId 
     private BookID id;
     private String title;
     private String author;

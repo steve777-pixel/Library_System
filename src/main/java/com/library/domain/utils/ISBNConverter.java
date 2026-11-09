@@ -3,7 +3,7 @@ package com.library.domain.utils;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-@Converter(autoApply = false)
+@Converter(autoApply = true)
 public class ISBNConverter implements AttributeConverter<ISBN, String>{
     @Override
     public String convertToDatabaseColumn(ISBN value){

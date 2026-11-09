@@ -1,17 +1,28 @@
 package com.library.domain.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import com.library.exception.utils.BookIDError;
 import com.library.exception.utils.BookIDException;
 
-// public record ???
-public final class BookID{
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Embeddable 
+@Getter 
+// @EqualsAndHashCode 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class BookID implements Serializable{
     //AA0000000 (2 Capital letters | 7 digits)
     private static final Pattern BOOK_ID_PATTERN = 
-        Pattern.compile("^[A-Z]{2}\\d{7}$");
-
-    private final String value;
+    Pattern.compile("^[A-Z]{2}\\d{7}$");
+    
+    @Column(name = "id")
+    private String value;
 
     public BookID(String id){
         if(id == null) throw new BookIDException(BookIDError.NULL_BOOK_ID);

@@ -15,6 +15,9 @@ public class LoanService{
     public void borrowBook(Member member, Book book, LocalDate dueDate){
         if(member == null) throw new MemberException(MemberError.NULL_MEMBER);
         if(book == null) throw new BookException(BookError.NULL_BOOK);
+        if(dueDate == null) throw new LoanException(LoanError.NULL_DUE_DATE);
+
+        if(dueDate.isBefore(LocalDate.now())) throw new LoanException(LoanError.PAST_DUE_DATE);
 
         Loan loan = new Loan(book, member, dueDate);
 

@@ -2,9 +2,10 @@
 
 ## 📌 High Priority / Next Steps
 - [✅] Create the `Email` and `EmailConverter` classes
-- [ ] Implement the `LoanService` layer to coordinate borrowings
+- [✅] Implement the `LoanService` layer to coordinate borrowings
 - [ ] Implement `LoanService` tests
 - [ ] Set up the H2 in-memory database configuration
+- [ ] Connect LoanService to LoanRepository
 
 ## ⏳ Future Enhancements
 - Work on the Loan Service later!

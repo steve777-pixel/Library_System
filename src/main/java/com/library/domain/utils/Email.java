@@ -5,7 +5,12 @@ import java.util.regex.Pattern;
 import com.library.exception.utils.EmailError;
 import com.library.exception.utils.EmailException;
 
-public record Email(String value) {
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import java.io.Serializable;
+
+@Embeddable
+public record Email(@Column(name = "email") String value) implements Serializable{
 
     // A much safer, standard regex that ensures an @ and a valid domain extension (.com, .org, etc.)
     // This enforces that dots must be separated by letters or numbers
